@@ -1,0 +1,30 @@
+article .article__header{
+    font-size:30px;
+}
+article .accessories{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3rem;
+}
+article .accessories .accessory{
+    width: 20%;
+}
+article .accessories .accessory .img{
+    width: 100%;
+    height: 50%;
+}
+article .accessories .accessory .img img{
+    width: 100%;
+    height: 100%;
+}
+article .accessories .accessory .accessory_info{
+    font-size: 19px;
+    text-align: center;
+}
+article .accessories .accessory .div-button{
+    text-align: center;
+}
+article .accessories .accessory .div-button button{
+    font-size: 17px;
+}

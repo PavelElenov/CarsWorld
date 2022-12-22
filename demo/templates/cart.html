@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main class="cart-main">
+        <div class="cart">
+            <div class="header">
+                {% if favourite_cars or favourite_accessories %}
+                    <h1>Твоята количка (<span>{{ request.session.cart_count }}</span>
+                        {% if request.session.cart_count > 1 %}
+                            <span>продукта</span>
+                        {% else %}
+                            <span>продукт</span>
+                        {% endif %}
+                        )</h1>
+                {% else %}
+                    <p class="empty">Количката ви е празна!</p>
+                {% endif %}
+            </div>
+            {% if favourite_accessories or favourite_cars %}
+                <div class="cart-info">
+                    <div class="items">
+                        {% if favourite_cars %}
+                            {% for car in favourite_cars %}
+                                <div class="item">
+                                    <div class="img">
+                                        <img src="{{ car.img.url }}" alt="">
+                                    </div>
+                                    <div class="item-info">
+                                        <p>{{ car.brand }}</p>
+                                        <p>{{ car.model }}</p>
+                                        <p>{{ car.engine_type }}</p>
+                                    </div>
+                                    <div class="for-price">
+                                        <table>
+                                            <tr>
+                                                <td>Стойност</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ car.price }}лв.</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="delete">
+                                        <button type="submit" class="secondary-btn"
+                                                onclick="location.href='{% url "delete item" car.id "car" %}'">
+                                            Изтрий
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% if favourite_accessories %}
+                            {% for accessory in favourite_accessories %}
+                                <div class="item">
+                                    <div class="img">
+                                        <img src="{{ accessory.img.url }}" alt="">
+                                    </div>
+                                    <div class="item-info">
+                                        <p>{{ accessory.name }}</p>
+                                    </div>
+                                    <div class="for-price">
+                                        <table>
+                                            <tr>
+                                                <td>Стойност</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ accessory.price }}лв.</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="delete">
+                                        <button type="submit" class="secondary-btn"
+                                                onclick="location.href='{% url "delete item" accessory.id "accessory" %}'">
+                                            Изтрий
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <p class="nothing"></p>
+                    </div>
+                    <div class="items_total_section">
+                        <div class="items_total_section__info">
+                            <p>Стойност на поръчката</p>
+                            <p>
+                                <span>Обща стойност:</span>
+                                <span>{{ total }}лв.</span>
+                            </p>
+                            <p>
+                                <span>Доставка:</span>
+                                <span>Безплатна</span>
+                            </p>
+                        </div>
+                        <p class="total_price">
+                            <span>Общо:</span>
+                            <span>{{ total }}лв.</span>
+                        </p>
+                        <div class="button">
+                            <button class="secondary-btn" onclick="location.href='{% url "buy" %}'">Купи</button>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+    <footer id="footer">
+        <div class="footer__info">
+            <button class="footer__btn">
+                <i class="fa-solid fa-arrow-up"></i>
+                Нагоре
+            </button>
+            <hr>
+            <p>&copy; 2022 Cars</p>
+        </div>
+    </footer>
+    <script src="{% static "js_files/btnUpper.js" %}"></script>
+    <script src="{% static "js_files/changeCartHeight.js" %}"></script>
+{% endblock %}

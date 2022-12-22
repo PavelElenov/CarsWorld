@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main>
+        {% if is_logged %}
+            <div class="body-profile">
+                <div class="content">
+                    <h1 class="profile-head">Детайли на акаунта</h1>
+                    <div class="content-img">
+                        {% if profile.img %}
+                            <div class="format-img">
+                                <img src="{{ profile.img.url }}" alt="" class="profile-img">
+                            </div>
+                        {% else %}
+                            <form action="{% url "add_img" %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <label for="">Добави снимка:</label>
+                                <input type="file" name="img">
+                                <div>
+                                    <button class="secondary-btn">Add image</button>
+                                </div>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <div class="desc">
+                        <span class="desc_head">Собствено име:</span>
+                        <h2>{{ profile.first_name }}</h2>
+                    </div>
+                    <div class="desc">
+                        <span class="desc_head">Фамилно име:</span>
+                        <h2>{{ profile.last_name }}</h2>
+                    </div>
+                    <div class="desc">
+                        <span class="desc_head">Имейл:</span>
+                        <h2>{{ profile.email }}</h2>
+                    </div>
+                    <div class="button">
+                        <a href="{% url "log_out" %}" class="secondary-btn">Log out</a>
+                    </div>
+                </div>
+            </div>
+            <footer id="footer">
+                <div class="footer__info">
+                    <button class="footer__btn">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        Нагоре
+                    </button>
+                    <hr>
+                    <p>&copy; 2022 Cars</p>
+                </div>
+            </footer>
+            <script src="{% static "js_files/btnUpper.js" %}"></script>
+        {% else %}
+            {% if request.session.not_logged %}
+                <p class="need_log_in" style="position:absolute;color:red;font-size: 30px;left: 50%;
+    top: 92px;transform: translate(-50%, -50%);font-weight: bold">You need to login!!!</p>
+            {% endif %}
+            <div class="img-background">
+                <img src="{% static "imges/login_img.jpeg" %}" alt="" class="login__img">
+                <div class="overlay"></div>
+            </div>
+
+            <form action="{% url "login" %}" method="post" class="login">
+                {% csrf_token %}
+                <div class="head">
+                    <h1 class="form_head">Login</h1>
+                </div>
+                <div class="body">
+                    {% if message %}
+                        <p class="invalid-message">{{ message }}</p>
+                    {% endif %}
+                    <div>
+                        <input type="text" placeholder="Email" name="email" required>
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Password" name="password" required>
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button class="primary-btn">Login</button>
+                    <p>Not a member? <span class="span">Register</span></p>
+                </div>
+            </form>
+            <form action="{% url "register" %}" method="post" class="register">
+                {% csrf_token %}
+                <div class="head">
+                    <h1 class="form_head">Register</h1>
+                </div>
+                <div class="body">
+                    <div>
+                        <input type="text" placeholder="First Name" name="first_name" required>
+                        <input type="text" placeholder="Last Name" name="last_name" required>
+                    </div>
+                    <div>
+                        <input type="email" placeholder="Email" name="email" required>
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Password" name="password" id="password" required>
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Confirm Password" name="confirm_password"
+                               id="confirm-password"
+                               onkeyup="validate_password()" required>
+                    </div>
+                    <p id="wrong-password"></p>
+                    <div class="terms">
+                        <input type="checkbox">
+                        <label for="">I accept <span class="span">Terms of Use</span></label>
+                    </div>
+                    <button class="primary-btn" id="register">Register</button>
+                </div>
+            </form>
+            <script src="{% static "js_files/spanFunc.js" %}"></script>
+            <script src="{% static "js_files/validatePassword.js" %}"></script>
+        {% endif %}
+    </main>
+{% endblock %}

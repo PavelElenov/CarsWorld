@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <article>
+            <h1 class="cars__header">Нашите автомобили</h1>
+            <p class="choose">Избери марка</p>
+            <div class="brands">
+                <ul>
+                    <li>
+                        <button id="first" class="car-logo active" name="mercedes" ><img src="{% static "cars_logos/mercedes-logo.png" %}" alt=""
+                                                class="car_logo"></button>
+                    </li>
+                    <li>
+                        <button class="car-logo" name="bmw"><img src="{% static "cars_logos/bmw-logo.png" %}" alt="" class="car_logo"></button>
+                    </li>
+                    <li>
+                        <button class="car-logo" name="audi"><img src="{% static "cars_logos/audi-logo.png" %}" alt="" class="car_logo"></button>
+                    </li>
+                    <li>
+                        <button id="last" class="car-logo" name="toyota"><img src="{% static "cars_logos/toyota_logo.png" %}" alt="" class="car_logo">
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="cars">
+                <div class="mercedes">
+                    {% for car in mercedes_cars %}
+                        <form action="{% url "add_car" %}" method="post" class="car">
+                            {% csrf_token %}
+                            <p class="car_info">{{ car.model }}</p>
+                            <p class="car_info">{{ car.price }}лв.</p>
+                            <p class="car_info"><span>{{ car.engine_type }}</span></p>
+                            <div class="car_img">
+                                <img src="{{ car.img.url }}" alt="">
+                            </div>
+                            <input type="text" name="car_id" value="{{ car.id }}" style="display: none">
+                            <div class="div-button">
+                                <button class="third_btn">Добави в количката</button>
+                            </div>
+                        </form>
+                    {% endfor %}
+                </div>
+                <div class="bmw">
+                    {% for car in bmw_cars %}
+                        <form action="{% url "add_car" %}" method="post" class="car">
+                            {% csrf_token %}
+                            <p class="car_info">{{ car.model }}</p>
+                            <p class="car_info">{{ car.price }}лв.</p>
+                            <p class="car_info"><span>{{ car.engine_type }}</span></p>
+                            <div class="car_img">
+                                <img src="{{ car.img.url }}" alt="">
+                            </div>
+                            <input type="text" name="car_id" value="{{ car.id }}" style="display: none">
+                            <div class="div-button">
+                                <button class="third_btn">Добави в количката</button>
+                            </div>
+                        </form>
+                    {% endfor %}
+                </div>
+                <div class="audi">
+                    {% for car in audi_cars %}
+                        <form action="{% url "add_car" %}" method="post" class="car">
+                            {% csrf_token %}
+                            <p class="car_info">{{ car.model }}</p>
+                            <p class="car_info">{{ car.price }}лв.</p>
+                            <p class="car_info"><span>{{ car.engine_type }}</span></p>
+                            <div class="car_img">
+                                <img src="{{ car.img.url }}" alt="">
+                            </div>
+                            <input type="text" name="car_id" value="{{ car.id }}" style="display: none">
+                            <div class="div-button">
+                                <button class="third_btn">Добави в количката</button>
+                            </div>
+                        </form>
+                    {% endfor %}
+                </div>
+                <div class="toyota">
+                    {% for car in toyota_cars %}
+                        <form action="{% url "add_car" %}" method="post" class="car">
+                            {% csrf_token %}
+                            <p class="car_info">{{ car.model }}</p>
+                            <p class="car_info">{{ car.price }}лв.</p>
+                            <p class="car_info"><span>{{ car.engine_type }}</span></p>
+                            <div class="car_img">
+                                <img src="{{ car.img.url }}" alt="">
+                            </div>
+                            <input type="text" name="car_id" value="{{ car.id }}" style="display: none">
+                            <div class="div-button">
+                                <button class="third_btn">Добави в количката</button>
+                            </div>
+                        </form>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+    </main>
+    <footer id="footer">
+        <div class="footer__info">
+            <button class="footer__btn">
+                <i class="fa-solid fa-arrow-up"></i>
+                Нагоре
+            </button>
+            <hr>
+            <p>&copy; 2022 Cars</p>
+        </div>
+    </footer>
+    <script src="{% static "js_files/btnUpper.js" %}"></script>
+    <script src="{% static "js_files/swap_brand.js" %}"></script>
+{% endblock %}

@@ -1,0 +1,130 @@
+*{
+    box-sizing: border-box;
+}
+.car1,.bmw-first-img, .bmw-second-img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+.imges{
+    display: grid;
+    grid-template-areas:
+            "mercedes mercedes"
+            "first-bmw second-bmw";
+    grid-gap: 5px;
+    margin-bottom: 30px;
+}
+.imges .img{
+    position: relative;
+}
+.imges .img:nth-child(1){
+    width: 100%;
+    height: 65rem;
+    grid-area: mercedes;
+}
+.imges .img .overlay{
+    position:absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: rgb(2,1,14);
+    background: linear-gradient(90deg, rgba(2,1,14,0.9640231092436975) 0%, rgba(14,14,19,0.9248074229691877) 6%, rgba(2,12,14,0.16850490196078427) 35%);
+}
+.imges .img .desc{
+    position: absolute;
+    top: 32%;
+    left: 126px;
+    color: #f6eded;
+}
+.imges .img .desc h1{
+    font-size: 50px;
+    font-weight: 100;
+    margin-bottom: 50px;
+}
+.imges .img .desc p{
+    color: #8f8c8c;
+    font-size:20px;
+}
+.imges .img:nth-child(2){
+    grid-area: first-bmw;
+    width: 100%;
+    height: 35rem;
+}
+.imges .img:nth-child(3){
+    grid-area: second-bmw;
+    width: 100%;
+    height: 35rem;
+}
+.imges .img .img__desc{
+    position: absolute;
+    top: 49px;
+    left: 48px;
+}
+.imges .img .img__desc .img__desc__img{
+    width: 15%;
+    float: left;
+    margin-right: 8px;
+}
+.imges .img .img__desc .img__desc__img img{
+    width: 100%;
+    height: 100%;
+}
+.imges .img .img__desc .img__desc__info{
+    text-transform: uppercase;
+    color: #f6eded;
+    font-size: 30px;
+}
+.imges .img:nth-child(2) .img__desc .img__desc__info{
+    display: inline-block;
+    width: 40%;
+}
+
+/*START INFO SECTION*/
+.info{
+    width: 100%;
+    background-color: #dfdde3;
+    padding:20px 0;
+    margin-bottom:25px;
+}
+.info div {
+    text-align: center;
+    color:black;
+    font-size:24px;
+    width: 25%;
+    margin: auto;
+}
+.info div h3{
+    margin: 0 0 15px 0;
+    padding:0;
+}
+.info div a{
+    font-size:24px;
+    display: inline-block;
+}
+/*START FOOTER*/
+#footer {
+    background-color: var(--clr-primary);
+    padding:10px 0;
+}
+#footer .footer__info{
+    width: 15%;
+    margin: 0 auto;
+    text-align: center;
+}
+#footer .footer__info .footer__btn{
+    font-size:25px;
+    color: #c9c6c6;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 50%;
+    background-color: var(--clr-primary);
+    border: none;
+}
+#footer .footer__info .footer__btn:hover{
+    background-color: grey;
+}
+#footer .footer__info p{
+    color:#c9c6c6;
+    font-size:20px;
+}

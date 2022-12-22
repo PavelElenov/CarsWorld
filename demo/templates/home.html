@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <main>
+        {#START IMGES#}
+        <section class="imges">
+            <div class="img">
+                <img src="{% static "imges/mercedes-benz-glc-suv-x254-hometeaser-2558x1066-05-2022.webp" %}" alt=""
+                     class="car1">
+                <div class="overlay"></div>
+                <div class="desc">
+                    <h1>Новият GLC.</h1>
+                    <p>Готови ли сте за него?</p>
+                </div>
+            </div>
+            <div class="img">
+                <img src="{% static "imges/bmw_first-img.jpg" %}" alt="" class="bmw-first-img">
+                <div class="overlay"></div>
+                <div class="img__desc">
+                    <div class="img__desc__img">
+                        <img src="{% static "imges/BMW_M_LOGO.png" %}" alt="">
+                    </div>
+                    <div class="img__desc__info">The XM първото Bmw xm.</div>
+                </div>
+            </div>
+            <div class="img">
+                <img src="{% static "imges/bmw_second_img.jpg" %}" alt="" class="bmw-second-img">
+                <div class="overlay"></div>
+                <div class="img__desc">
+                    <div class="img__desc__info">Новото bmw серия x1 и ix1</div>
+                </div>
+            </div>
+        </section>
+
+        {#START INFO SECTION#}
+        <section class="info">
+            <div>
+                <h3>ВЛЕЗТЕ В СВЕТА НА АВТОМОБИЛИТЕ</h3>
+                <a href="{% url "cars" %}" class="secondary-btn">Автомобили</a>
+            </div>
+        </section>
+
+    </main>
+    <footer id="footer">
+        <div class="footer__info">
+            <button class="footer__btn">
+                <i class="fa-solid fa-arrow-up"></i>
+                Нагоре
+            </button>
+            <hr>
+            <p>&copy; 2022 Cars</p>
+        </div>
+    </footer>
+    <script src="{% static "js_files/btnUpper.js" %}"></script>
+{% endblock %}

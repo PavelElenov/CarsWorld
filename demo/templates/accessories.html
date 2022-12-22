@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <article>
+            <h1 class="article__header">Избрани продукти</h1>
+            <div class="accessories">
+                {% for accessory in accessories %}
+                    <form action="{% url "add accessory" %}" method="post" class="accessory">
+                        {% csrf_token %}
+                        <div class="img">
+                            <img src="{{ accessory.img.url }}" alt="">
+                        </div>
+                        <p class="accessory_info">{{ accessory.name }}</p>
+                        <p class="accessory_info"> {{ accessory.price }}лв.</p>
+                        <input type="text" name="id" value="{{ accessory.id }}" style="display: none">
+                        <div class="div-button">
+                            <button class="third_btn">Добави в количката</button>
+                        </div>
+                    </form>
+                {% endfor %}
+            </div>
+        </article>
+    </main>
+    <footer id="footer">
+        <div class="footer__info">
+            <button class="footer__btn">
+                <i class="fa-solid fa-arrow-up"></i>
+                Нагоре
+            </button>
+            <hr>
+            <p>&copy; 2022 Cars</p>
+        </div>
+    </footer>
+    <script src="{% static "js_files/btnUpper.js" %}"></script>
+{% endblock %}

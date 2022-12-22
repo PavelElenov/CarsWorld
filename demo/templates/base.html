@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarsWorld</title>
+    <link rel="icon" href="{% static 'imges/Calgary_Flames_logo.svg.png' %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+<header id="header">
+    <nav>
+        <a href="{% url "home" %}"><img src="{% static "imges/Calgary_Flames_logo.svg.png" %}" alt=""
+                                        class="header__img"></a>
+        <ul>
+            <li class="item">
+                <a href="{% url "cars" %}" class="link">
+                    <i class="fa-solid fa-car"></i>
+                    Автомобили
+                </a>
+            </li>
+            <li class="item">
+                <a href="{% url "accessories" %}" class="link">
+                    Аксесоари
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <button class="header__btn">
+                    <a href="{% url "cart" %}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Kоличка
+                        {% if request.session.cart_count != 0 %}
+                            <span>{{ request.session.cart_count }}</span>
+                        {% else %}
+                            <span>0</span>
+                        {% endif %}
+                    </a>
+                </button>
+            </li>
+            <li>
+                <button class="header__btn">
+                    <a href="{% url "profile" %}">
+                        <i class="fa-solid fa-user"></i>
+                        Profile
+                    </a>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
