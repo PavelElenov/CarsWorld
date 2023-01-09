@@ -4,6 +4,7 @@
 @import "cars.css";
 @import "accessories.css";
 @import "cart.css";
+@import "edit.css";
 
 :root{
     --clr-primary:black;

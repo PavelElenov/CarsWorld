@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <div class="edit-body">
+            <div class="edit__content">
+                <h1 class="edit__header">Данни на акаунта</h1>
+                {% if profile.img %}
+                    <div class="format-img">
+                        <img src="{{ profile.img.url }}" alt="" class="profile-img">
+                    </div>
+                    <input type="file" name="img">
+                {% else %}
+                    <label for="">Добави снимка:</label>
+                    <input type="file" name="img">
+                {% endif %}
+                <label>Собствено име:<input type="text" value="{{ profile.first_name }}"></label>
+                <label for="">Фамилно име:<input type="text" value="{{ profile.last_name }}"></label>
+                <label for="" class="email">Имейл:<input type="text" value="{{ profile.email }}"></label>
+                <div class="edit__button">
+                    <button class="secondary-btn">Запаметяване</button>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+            <div class="footer__info">
+                <button class="footer__btn">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    Нагоре
+                </button>
+                <hr>
+                <p>&copy; 2022 Cars</p>
+            </div>
+        </footer>
+    </main>
+    <script src="{% static "js_files/btnUpper.js" %}"></script>
+{% endblock %}

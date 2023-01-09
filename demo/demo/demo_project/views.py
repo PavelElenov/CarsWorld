@@ -107,14 +107,18 @@ def show_cars(request):
 def add_car_to_cart(request):
     profile = get_profile()
     not_logged = True
+
     if profile:
         if profile.logged:
             not_logged = False
             request.session['not_logged'] = False
+
             car_id = request.POST.get("car_id")
             car = Cars.objects.get(id=car_id)
             profile.favourite_cars.add(car)
+
             profile.save()
+
             return redirect("cart")
     if not_logged:
         request.session['not_logged'] = True
@@ -170,7 +174,6 @@ def show_cart(request):
 
 def delete_item_from_cart(request, id, type):
     profile = get_profile()
-    object = ""
 
     if type == "car":
         object = Cars.objects.get(id=id)
@@ -191,3 +194,13 @@ def buy_products_in_cart(request):
     profile.favourite_accessories.clear()
     profile.save()
     return redirect("cart")
+
+
+def edit_profile(request):
+    profile = get_profile()
+
+    context = {
+        "profile": profile
+    }
+    return render(request, 'edit.html', context)
+

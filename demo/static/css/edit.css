@@ -1,0 +1,36 @@
+.edit-body{
+    background-color: #f1e8e8;
+    padding: 5rem 0;
+}
+
+.edit__content{
+    width: 50%;
+    margin:0 auto;
+    padding: 3.5rem;
+    background-color: white;
+}
+
+.edit__header{
+    font-size:4rem;
+}
+
+.edit__content label{
+    font-size:2rem;
+    display: block;
+    margin-bottom:2rem;
+}
+
+.edit__content label input{
+    margin-left: 1rem;
+    font-size:2rem;
+}
+
+.edit__content .email input{
+    width: 30rem;
+
+}
+
+.edit__content .format-img,input[name='img']{
+    margin-bottom: 2rem;
+    font-size:2rem;
+}
