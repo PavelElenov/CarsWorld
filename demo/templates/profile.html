@@ -54,8 +54,7 @@
             <script src="{% static "js_files/btnUpper.js" %}"></script>
         {% else %}
             {% if request.session.not_logged %}
-                <p class="need_log_in" style="position:absolute;color:red;font-size: 30px;left: 50%;
-    top: 92px;transform: translate(-50%, -50%);font-weight: bold">You need to login!!!</p>
+                <p class="error">You need to login!!!</p>
             {% endif %}
             <div class="img-background">
                 <img src="{% static "imges/login_img.jpeg" %}" alt="" class="login__img">
@@ -82,40 +81,10 @@
                 </div>
                 <div class="footer">
                     <button class="primary-btn">Login</button>
-                    <p>Not a member? <span class="span">Register</span></p>
+                    <p>Not a member? <a class="span" href="{% url "register" %}">Register</a></p>
                 </div>
             </form>
-            <form action="{% url "register" %}" method="post" class="register">
-                {% csrf_token %}
-                <div class="head">
-                    <h1 class="form_head">Register</h1>
-                </div>
-                <div class="body">
-                    <div>
-                        <input type="text" placeholder="First Name" name="first_name" required>
-                        <input type="text" placeholder="Last Name" name="last_name" required>
-                    </div>
-                    <div>
-                        <input type="email" placeholder="Email" name="email" required>
-                    </div>
-                    <div>
-                        <input type="password" placeholder="Password" name="password" id="password" required>
-                    </div>
-                    <div>
-                        <input type="password" placeholder="Confirm Password" name="confirm_password"
-                               id="confirm-password"
-                               onkeyup="validate_password()" required>
-                    </div>
-                    <p id="wrong-password"></p>
-                    <div class="terms">
-                        <input type="checkbox">
-                        <label for="">I accept <span class="span">Terms of Use</span></label>
-                    </div>
-                    <button class="primary-btn" id="register">Register</button>
-                </div>
-            </form>
-            <script src="{% static "js_files/spanFunc.js" %}"></script>
-            <script src="{% static "js_files/validatePassword.js" %}"></script>
+
         {% endif %}
     </main>
 {% endblock %}

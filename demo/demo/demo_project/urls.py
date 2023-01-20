@@ -2,7 +2,7 @@ from django.urls import path
 
 from demo.demo_project.views import show_home_page, show_profile, register_user, \
     login_user, log_out, add_img, show_cars, add_car_to_cart, show_accessories, add_accessory_to_cart, show_cart, \
-    delete_item_from_cart, buy_products_in_cart, edit_profile
+    delete_item_from_cart, edit_profile, successful_order
 
 urlpatterns = [
     path('', show_home_page, name='home'),
@@ -17,6 +17,6 @@ urlpatterns = [
     path("accessories/add_accessory/", add_accessory_to_cart, name="add accessory"),
     path("cart/", show_cart, name="cart"),
     path("cart/delete_item/<int:id>/<type>/", delete_item_from_cart, name="delete item"),
-    path("cart/buy_products", buy_products_in_cart, name="buy"),
     path('profile/edit', edit_profile, name='edit'),
+    path('successful_order/', successful_order, name='successful order')
 ]

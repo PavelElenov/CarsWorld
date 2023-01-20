@@ -119,15 +119,20 @@ main{
     width: 18px;
     height: 17px;
 }
-.register{
-    display: none;
-}
 .login{
     display: block;
 }
 .register .body #wrong-password{
     font-size:18px;
     text-align: center;
+}
+.register p{
+    font-size:2rem;
+    color:white;
+    text-align: center;
+}
+.register a{
+    color:#0089BA;
 }
 
 /*START PROFILE INFO*/
@@ -165,6 +170,7 @@ main{
 }
 .body-profile .content .desc span{
     font-size:13px;
+    text-decoration: none;
 }
 .body-profile .content .desc h2{
     margin:5px 0 0 0;
@@ -190,6 +196,15 @@ main{
     width: 100%;
     height: 100%;
     border-radius: 100%;
+}
+
+.error{
+    color:red;
+    font-size: 2rem;
+    left: 50%;
+    top: 92px;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
 }
 
 

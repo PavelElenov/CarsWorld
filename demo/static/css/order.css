@@ -1,0 +1,38 @@
+body{
+    background-color: #bfbcbc;
+}
+
+.order{
+    width: 30%;
+    margin: 10% auto;
+    border-radius: 1rem;
+    background-color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+.order div i{
+    font-size: 5rem;
+    color: greenyellow;
+}
+.success{
+    color: greenyellow;
+    font-size:2.5rem;
+    font-weight: bold;
+}
+
+.success-message{
+    font-size:2rem;
+}
+
+.order button{
+    border-radius: 50px;
+    border: none;
+    color: white;
+    background-color: greenyellow;
+    padding:1rem;
+    font-size: 1.5rem;
+}
+
+.order button:hover{
+    transform: scale(1.2);
+}

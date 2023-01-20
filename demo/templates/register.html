@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main>
+
+        <div class="img-background">
+            <img src="{% static "imges/login_img.jpeg" %}" alt="" class="login__img">
+            <div class="overlay"></div>
+        </div>
+
+        <form action="{% url "register" %}" method="post" class="register">
+            {% csrf_token %}
+            <div class="head">
+                <h1 class="form_head">Register</h1>
+            </div>
+            {% if error %}
+                <div style="text-align: center">
+                    <span class="error">{{ error }}</span>
+                </div>
+            {% endif %}
+            <div class="body">
+
+                <div>
+                    <input type="text" placeholder="First Name" name="first_name" required>
+                    <input type="text" placeholder="Last Name" name="last_name" required>
+                </div>
+                <div>
+                    <input type="email" placeholder="Email" name="email" required>
+                </div>
+                <div>
+                    <input type="password" placeholder="Password" name="password" id="password" required>
+                </div>
+                <div>
+                    <input type="password" placeholder="Confirm Password" name="confirm_password"
+                           id="confirm-password"
+                           onkeyup="validate_password()" required>
+                </div>
+                <p id="wrong-password"></p>
+                <p>Click here to <a href="{% url "login" %}">Login</a></p>
+                <button class="primary-btn" id="register">Register</button>
+            </div>
+        </form>
+        <script src="{% static "js_files/validatePassword.js" %}"></script>
+    </main>
+{% endblock %}

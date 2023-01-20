@@ -28,50 +28,72 @@ def show_home_page(request):
     if profile:
         if profile.logged:
             request.session['cart_count'] = cart_count()
-            cart = True
+
+            if request.session['cart_count'] > 0:
+                cart = True
     if not cart:
         request.session['cart_count'] = 0
 
-    return render(request, "home.html")
+    return render(request, "home.html", {'title': "CarsWorld"})
 
 
 def show_profile(request):
     is_logged = False
     profile = get_profile()
+
     if profile:
         if profile.logged:
             is_logged = True
+
+    if request.method == "POST":
+        print(request)
+
     context = {
         "is_logged": is_logged,
         "profile": profile,
+        "title": 'Profile Page',
     }
 
     return render(request, "profile.html", context)
 
 
 def register_user(request):
-    form = Form(request.POST)
+    if request.method == "POST":
+        form = Form(request.POST)
 
-    if form.is_valid():
-        new_profile = Profile(**form.cleaned_data)
-        new_profile.save()
-        return redirect("profile")
+        if form.is_valid():
+            email = request.POST.get('email')
+            emails = Profile.objects.values("email")
+
+            for el in emails:
+                if el["email"] == email:
+                    error = "Already have user with this email! Please Login"
+                    return render(request, "register.html", {"error": error})
+
+            new_profile = Profile(**form.cleaned_data)
+            new_profile.save()
+            return redirect("profile")
+    else:
+        return render(request, "register.html", {'title': "Register Page"})
 
 
 def login_user(request):
-    email = request.POST.get("email")
-    profile = Profile.objects.get(email=email)
+    if request.method == "POST":
+        email = request.POST.get("email")
+        profile = Profile.objects.get(email=email)
 
-    have_account = False
-    if profile:
-        password = request.POST.get("password")
-        if profile.password == password:
-            profile.logged = True
-            have_account = True
-            profile.save()
-            return redirect("home")
-    if not have_account:
-        return render(request, "profile.html", {"message": "Password is not correct!"})
+        have_account = False
+        if profile:
+            password = request.POST.get("password")
+            if profile.password == password:
+                profile.logged = True
+                have_account = True
+                profile.save()
+                return redirect("home")
+        if not have_account:
+            return render(request, "profile.html", {"message": "Incorrect email or password!", 'title': "Profile Page"})
+    else:
+        return render(request, "profile.html")
 
 
 def log_out(request):
@@ -99,7 +121,8 @@ def show_cars(request):
         "mercedes_cars": mercedes_cars,
         "bmw_cars": bmw_cars,
         "toyota_cars": toyota_cars,
-        "audi_cars": audi_cars
+        "audi_cars": audi_cars,
+        'title': "Cars Page",
     }
     return render(request, "cars.html", context)
 
@@ -129,6 +152,7 @@ def show_accessories(request):
     accessories = Accessories.objects.all()
     context = {
         "accessories": accessories,
+        'title': 'Accessories Page',
     }
     return render(request, "accessories.html", context)
 
@@ -168,6 +192,7 @@ def show_cart(request):
         "favourite_cars": favourite_cars,
         "favourite_accessories": favourite_accessories,
         "total": total_price,
+        'title': "Cart Page",
     }
     return render(request, "cart.html", context)
 
@@ -187,20 +212,42 @@ def delete_item_from_cart(request, id, type):
     return redirect("cart")
 
 
-def buy_products_in_cart(request):
-    profile = get_profile()
-
-    profile.favourite_cars.clear()
-    profile.favourite_accessories.clear()
-    profile.save()
-    return redirect("cart")
-
-
 def edit_profile(request):
-    profile = get_profile()
+    if request.method == "GET":
+        profile = get_profile()
 
-    context = {
-        "profile": profile
-    }
-    return render(request, 'edit.html', context)
+        context = {
+            "profile": profile,
+            "title": 'Edit Page',
+        }
+        return render(request, 'edit.html', context)
+    else:
+        img = request.FILES["img"]
+        firstName = request.POST.get('firstName')
+        lastName = request.POST.get('lastName')
+        email = request.POST.get("email")
+
+        profile = get_profile()
+        profile.img = img
+        profile.first_Name = firstName
+        profile.last_Name = lastName
+        profile.email = email
+
+        profile.save()
+
+        return redirect('profile')
+
+
+def successful_order(request):
+    if request.method == "GET":
+        return render(request, 'successfulOrder.html')
+    else:
+        profile = get_profile()
+
+        profile.favourite_cars.clear()
+        profile.favourite_accessories.clear()
+        profile.save()
+
+        request.session['cart_count'] = 0
+        return redirect('cars')
 
